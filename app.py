@@ -51,7 +51,7 @@ with col1:
 with col2:
     point_lon = st.number_input('Point (lon)', value=-3.8819, format="%.6f")
 with col3:
-    chosen_radius = st.slider("Pick radius from the chosen point (km)", 0, 2000, 80)
+    chosen_radius = st.slider("Pick radius from the chosen point (km)", 0, 1000, 80)
 with col4:
     chosen_per_crop = st.slider("Pick a % cropland to use", 0, 100, 25)
 with col5:
@@ -134,7 +134,7 @@ with col1:
     fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
                        mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
                        showlegend = False,
-                       coloraxis_colorbar_title_text = 'Moisture %')
+                       coloraxis_colorbar_title_text = '%')
     
     st.plotly_chart(fig, use_container_width=True)
 
@@ -172,7 +172,7 @@ with col2:
     fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
                        mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
                        showlegend = False,
-                       coloraxis_colorbar_title_text = 'Precip mm/yr')
+                       coloraxis_colorbar_title_text = 'mm/yr')
     
     st.plotly_chart(fig, use_container_width=True)
 
@@ -183,7 +183,7 @@ with col2:
     fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
                        mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
                        showlegend = False,
-                       coloraxis_colorbar_title_text = 'Temp °C')
+                       coloraxis_colorbar_title_text = '°C')
     
     st.plotly_chart(fig, use_container_width=True)
 
@@ -195,7 +195,7 @@ with col2:
     fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
                        mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
                        showlegend = False,
-                       coloraxis_colorbar_title_text = 'Moisture %')
+                       coloraxis_colorbar_title_text = '%')
     
     st.plotly_chart(fig, use_container_width=True)
 

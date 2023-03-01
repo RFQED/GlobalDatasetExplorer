@@ -133,7 +133,7 @@ with col1:
     fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
                        mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
                        showlegend = False,
-                       coloraxis_colorbar_title_text = 'Soil Moisture %')
+                       coloraxis_colorbar_title_text = 'Moisture %')
     
     st.plotly_chart(fig, use_container_width=True)
 

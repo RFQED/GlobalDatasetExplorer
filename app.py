@@ -99,7 +99,6 @@ with col1:
                        mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
                        showlegend = False,
                        coloraxis_colorbar_title_text = 'pH')
-                      )
     st.plotly_chart(fig, use_container_width=True)
 
     
@@ -110,8 +109,7 @@ with col1:
     fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
                        mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
                        showlegend = False,
-                       coloraxis_colorbar_title_text = '°C'
-                      )
+                       coloraxis_colorbar_title_text = '°C')
     
     st.plotly_chart(fig, use_container_width=True)
 
@@ -123,8 +121,7 @@ with col1:
     fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
                        mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
                        showlegend = False,
-                       coloraxis_colorbar_title_text = '°C'
-                       )
+                       coloraxis_colorbar_title_text = '°C')
     
     st.plotly_chart(fig, use_container_width=True)
 
@@ -136,8 +133,7 @@ with col1:
     fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
                        mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
                        showlegend = False,
-                       coloraxis_colorbar_title_text = 'Soil Moisture %'
-                      )
+                       coloraxis_colorbar_title_text = 'Soil Moisture %')
     
     st.plotly_chart(fig, use_container_width=True)
 
@@ -149,8 +145,7 @@ with col1:
     fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
                        mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
                        showlegend = False,
-                       coloraxis_colorbar_title_text = 'CEC'
-                      )
+                       coloraxis_colorbar_title_text = 'CEC')
     
     st.plotly_chart(fig, use_container_width=True)
 
@@ -177,7 +172,6 @@ with col2:
                        mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
                        showlegend = False,
                        coloraxis_colorbar_title_text = 'Precip mm/yr')
-                      )
     
     st.plotly_chart(fig, use_container_width=True)
 
@@ -189,7 +183,6 @@ with col2:
                        mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
                        showlegend = False,
                        coloraxis_colorbar_title_text = 'Temp °C')
-                      )
     
     st.plotly_chart(fig, use_container_width=True)
 
@@ -202,7 +195,6 @@ with col2:
                        mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
                        showlegend = False,
                        coloraxis_colorbar_title_text = 'Moisture %')
-                      )
     
     st.plotly_chart(fig, use_container_width=True)
 
@@ -214,7 +206,6 @@ with col2:
                        mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
                        showlegend = False,
                        coloraxis_colorbar_title_text = '% Cropland')
-                      )
     
     st.plotly_chart(fig, use_container_width=True)
     

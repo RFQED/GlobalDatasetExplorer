@@ -4,10 +4,9 @@ import io
 import os
 import streamlit as st
 import plotly.express as px
-from math import pi, cos
+from math import pi, cos, radians
 
 st.set_page_config(layout="wide")
-
 
 mapbox_token='pk.eyJ1IjoicmZxZWQiLCJhIjoiY2t4MHBxZjE4MHU3NzJ2bnl3cmV6bzZodCJ9.qwxACnMntkPpdmBIa1zzug'
 px.set_mapbox_access_token(mapbox_token)

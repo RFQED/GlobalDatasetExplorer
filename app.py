@@ -131,6 +131,17 @@ with col1:
     
     st.plotly_chart(fig, use_container_width=True)
 
+
+    st.write("CEC, ???")
+    fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='CEC', zoom=6.5, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
+    fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":mid_lat, "lon":mid_lon})
+    fig.add_trace(fig2.data[0])
+    fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
+                            mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
+                            showlegend = False)
+    
+    st.plotly_chart(fig, use_container_width=True)
+
     
 
 
@@ -177,8 +188,18 @@ with col2:
     
     st.plotly_chart(fig, use_container_width=True)
 
+    st.write("% Cropland")
+    fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='is_crop', zoom=6.5, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
+    fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":mid_lat, "lon":mid_lon})
+    fig.add_trace(fig2.data[0])
+    fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
+                            mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
+                            showlegend = False)
     
-vars_to_plot = ['ph', 'bulk_den', 'soil_temperature_0_to_7cm' , 'precipitation' ,'soil_temperature_7_to_28cm', 'soil_moisture_0_to_7cm' , 'soil_moisture_7_to_28cm'] 
+    st.plotly_chart(fig, use_container_width=True)
+    
+    
+vars_to_plot = ['ph', 'bulk_den', 'soil_temperature_0_to_7cm' , 'precipitation' ,'soil_temperature_7_to_28cm', 'soil_moisture_0_to_7cm' , 'soil_moisture_7_to_28cm', 'cec', 'is_crop'] 
     
 fig = make_subplots(rows=1, cols=len(vars_to_plot))
 for i, var in enumerate(vars_to_plot):

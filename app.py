@@ -45,7 +45,7 @@ def get_data():
 df = get_data()
 
 
-col1, col2, col3, col4 = st.columns(4)
+col1, col2, col3, col4, col5 = st.columns(5)
 with col1:
     point_lat = st.number_input('Point (lat)', value=55.8852, format="%.6f")
 with col2:
@@ -54,7 +54,8 @@ with col3:
     chosen_radius = st.slider("Pick radius from the chosen point (km)", 0, 800, 80)
 with col4:
     chosen_per_crop = st.slider("Pick a % cropland to use", 0, 100, 25)
-    
+with col5:
+    zoom_level = st.slider("Plot zoom level", 0.0, 10.0, 6.5)
 
 #make a bounding box around this lat_lon
 df = df[df['latitude'] < point_lat + 10]
@@ -92,7 +93,7 @@ col1, col2 = st.columns(2)
 
 with col1:
     st.write("Topsoil pH (in H2O), -log(H+)")
-    fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='ph', zoom=6.5, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
+    fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='ph', zoom=zoom_level, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
     #fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":mid_lat, "lon":mid_lon})
     #fig.add_trace(fig2.data[0])
     fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
@@ -103,7 +104,7 @@ with col1:
 
     
     st.write("Temperature at 2m, dC")
-    fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='temperature_2m', zoom=6.5, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
+    fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='temperature_2m', zoom=zoom_level, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
     fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":mid_lat, "lon":mid_lon})
     fig.add_trace(fig2.data[0])
     fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
@@ -115,7 +116,7 @@ with col1:
 
 
     st.write("Soil Temperature 0-7cm, dC")
-    fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='soil_temperature_0_to_7cm', zoom=6.5, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
+    fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='soil_temperature_0_to_7cm', zoom=zoom_level, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
     fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":mid_lat, "lon":mid_lon})
     fig.add_trace(fig2.data[0])
     fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
@@ -127,7 +128,7 @@ with col1:
 
 
     st.write("Soil Moisture 0-7cm, dC")
-    fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='soil_moisture_0_to_7cm', zoom=6.5, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
+    fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='soil_moisture_0_to_7cm', zoom=zoom_level, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
     fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":mid_lat, "lon":mid_lon})
     fig.add_trace(fig2.data[0])
     fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
@@ -139,7 +140,7 @@ with col1:
 
 
     st.write("CEC, ???")
-    fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='cec', zoom=6.5, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
+    fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='cec', zoom=zoom_level, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
     fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":mid_lat, "lon":mid_lon})
     fig.add_trace(fig2.data[0])
     fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
@@ -154,7 +155,7 @@ with col1:
 
 with col2:
     st.write("Topsoil bulk density, kg/dm-3")
-    fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='bulk_den', zoom=6.5, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
+    fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='bulk_den', zoom=zoom_level, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
     fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":mid_lat, "lon":mid_lon})
     fig.add_trace(fig2.data[0])
     fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
@@ -165,7 +166,7 @@ with col2:
 
 
     st.write("Avg Yearly Precipitation (mm/yr), (Over 10yrs)")
-    fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='precipitation', zoom=6.5, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
+    fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='precipitation', zoom=zoom_level, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
     fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":mid_lat, "lon":mid_lon})
     fig.add_trace(fig2.data[0])
     fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
@@ -176,7 +177,7 @@ with col2:
     st.plotly_chart(fig, use_container_width=True)
 
     st.write("Soil Temperature 7-28cm, dC")
-    fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='soil_temperature_7_to_28cm', zoom=6.5, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
+    fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='soil_temperature_7_to_28cm', zoom=zoom_level, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
     fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":mid_lat, "lon":mid_lon})
     fig.add_trace(fig2.data[0])
     fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
@@ -188,7 +189,7 @@ with col2:
 
 
     st.write("Soil Moisture 7-28cm, dC")
-    fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='soil_moisture_7_to_28cm', zoom=6.5, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
+    fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='soil_moisture_7_to_28cm', zoom=zoom_level, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
     fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":mid_lat, "lon":mid_lon})
     fig.add_trace(fig2.data[0])
     fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
@@ -199,7 +200,7 @@ with col2:
     st.plotly_chart(fig, use_container_width=True)
 
     st.write("% Cropland")
-    fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='is_crop', zoom=6.5, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
+    fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='is_crop', zoom=zoom_level, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
     fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":mid_lat, "lon":mid_lon})
     fig.add_trace(fig2.data[0])
     fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},

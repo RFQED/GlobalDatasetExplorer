@@ -41,11 +41,6 @@ def get_data():
 
 
 df = get_data()
-st.write("Done")
-st.write(df['latitude'].max())
-st.write(df['latitude'].min())
-
-
 
 
 col1, col2, col3, col4 = st.columns(4)

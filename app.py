@@ -58,11 +58,11 @@ with col5:
     zoom_level = st.slider("Plot zoom level", 0.0, 10.0, 6.5)
 
 #make a bounding box around this lat_lon
-df = df[df['latitude'] < point_lat + 10]
-df = df[df['latitude'] > point_lat - 10]
+df = df[df['latitude'] < point_lat + 20]
+df = df[df['latitude'] > point_lat - 20]
 
-df = df[df['longitude'] < point_lon + 10]
-df = df[df['longitude'] > point_lon - 10]
+df = df[df['longitude'] < point_lon + 20]
+df = df[df['longitude'] > point_lon - 20]
 
 
 #Apply distance function to dataframe

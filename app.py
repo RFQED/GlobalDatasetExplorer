@@ -83,6 +83,7 @@ mid_lon = (lon_low + lon_high) / 2
 chosen_point_data = [[point_lat, point_lon, 100]]
 df_chosen_point = pd.DataFrame(chosen_point_data, columns=['lat', 'lon', 'size'])
 
+df['Soil Temp 0-7cm'] = df['soil_temperature_0_to_7cm']
 
 #,longitude,latitude,precipitation,temperature_2m,soil_temperature_0_to_7cm,soil_temperature_7_to_28cm,soil_moisture_0_to_7cm,soil_moisture_7_to_28cm,ph,cec,bulk_den,is_soil,is_crop
 
@@ -111,7 +112,7 @@ with col1:
 
 
     st.write("Soil Temperature 0-7cm, dC")
-    fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='soil_temperature_0_to_7cm', zoom=6.5, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
+    fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='Soil Temp 0-7cm', zoom=6.5, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
     fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":mid_lat, "lon":mid_lon})
     fig.add_trace(fig2.data[0])
     fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
@@ -152,8 +153,7 @@ with col2:
     fig.add_trace(fig2.data[0])
     fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
                        mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
-                       showlegend = False,
-                       hovermode='closest')
+                       showlegend = False)
     
     st.plotly_chart(fig, use_container_width=True)
 

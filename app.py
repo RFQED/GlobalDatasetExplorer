@@ -106,3 +106,21 @@ with colbulkdensity:
                             showlegend = False)
     
     st.plotly_chart(fig, use_container_width=True)
+
+
+
+vars_to_plot = ['ph', 'bulk_den'] 
+    
+fig = make_subplots(rows=1, cols=len(vars_to_plot))
+for i, var in enumerate(vars_to_plot):
+    fig.add_trace(
+        go.Box(
+            y=df[var],
+            name=var,
+            boxmean=True),
+        row=1, col=i+1
+    )
+
+fig.update_traces(boxpoints='all', jitter=.3)
+fig.update_layout(height=750)
+st.plotly_chart(fig, use_container_width=True)

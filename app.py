@@ -7,7 +7,7 @@ import plotly.express as px
 from math import sin, cos, sqrt, atan2, radians, pi
 import plotly
 from plotly.subplots import make_subplots
-
+import plotly.graph_objects as go
 
 st.set_page_config(layout="wide")
 

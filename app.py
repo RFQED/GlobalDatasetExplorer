@@ -47,16 +47,16 @@ st.write(df['latitude'].min())
 
 
 
-with st.form(key='starting'):
-    col1, col2, col3, col4 = st.columns(4)
-    with col1:
-        point_lat = st.number_input('Point (lat)', value=55.8852, format="%.6f")
-    with col2:
-        point_lon = st.number_input('Point (lon)', value=-3.8819, format="%.6f")
-    with col3:
-        chosen_radius = st.slider("Pick radius from the chosen point (km)", 0, 800, 80)
-    with col4:
-        chosen_per_crop = st.slider("Pick a % cropland to use", 0, 100, 25)
+
+col1, col2, col3, col4 = st.columns(4)
+with col1:
+    point_lat = st.number_input('Point (lat)', value=55.8852, format="%.6f")
+with col2:
+    point_lon = st.number_input('Point (lon)', value=-3.8819, format="%.6f")
+with col3:
+    chosen_radius = st.slider("Pick radius from the chosen point (km)", 0, 800, 80)
+with col4:
+    chosen_per_crop = st.slider("Pick a % cropland to use", 0, 100, 25)
     
 
 #make a bounding box around this lat_lon

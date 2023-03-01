@@ -6,6 +6,8 @@ import streamlit as st
 import plotly.express as px
 from math import sin, cos, sqrt, atan2, radians, pi
 import plotly
+from plotly.subplots import make_subplots
+
 
 st.set_page_config(layout="wide")
 

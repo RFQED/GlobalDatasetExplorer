@@ -147,12 +147,13 @@ with col1:
 
 with col2:
     st.write("Topsoil bulk density, kg/dm-3")
-    fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='bulk_den', zoom=6.5, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
+    fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='bulk_den', zoom=6.5, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno", marker=go.scattermapbox.Marker(colorbar=dict(title='Peak_hour')))
     fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":mid_lat, "lon":mid_lon})
     fig.add_trace(fig2.data[0])
     fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
-                            mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
-                            showlegend = False)
+                       mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
+                       showlegend = False,
+                       hovermode='closest')
     
     st.plotly_chart(fig, use_container_width=True)
 

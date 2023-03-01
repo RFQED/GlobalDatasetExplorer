@@ -51,7 +51,7 @@ with col1:
 with col2:
     point_lon = st.number_input('Point (lon)', value=-3.8819, format="%.6f")
 with col3:
-    chosen_radius = st.slider("Pick radius from the chosen point (km)", 0, 800, 80)
+    chosen_radius = st.slider("Pick radius from the chosen point (km)", 0, 2000, 80)
 with col4:
     chosen_per_crop = st.slider("Pick a % cropland to use", 0, 100, 25)
 with col5:

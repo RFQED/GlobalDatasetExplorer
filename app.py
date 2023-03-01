@@ -84,9 +84,11 @@ chosen_point_data = [[point_lat, point_lon, 100]]
 df_chosen_point = pd.DataFrame(chosen_point_data, columns=['lat', 'lon', 'size'])
 
 
-colph, colbulkdensity = st.columns(2)
+#,longitude,latitude,precipitation,temperature_2m,soil_temperature_0_to_7cm,soil_temperature_7_to_28cm,soil_moisture_0_to_7cm,soil_moisture_7_to_28cm,ph,cec,bulk_den,is_soil,is_crop
 
-with colph:
+col1, col2 = st.columns(2)
+
+with col1:
     st.write("Topsoil pH (in H2O), -log(H+)")
     fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='ph', zoom=6.5, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
     #fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":mid_lat, "lon":mid_lon})
@@ -95,9 +97,44 @@ with colph:
                             mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
                             showlegend = False)
     st.plotly_chart(fig, use_container_width=True)
-    # Show pH plot
 
-    # Plot SOIL BULK DENSITY data from soil data  #54.65270979260174, -2.392090808630309
+    
+    st.write("Temperature at 2m, dC")
+    fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='temperature_2m', zoom=6.5, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
+    fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":mid_lat, "lon":mid_lon})
+    fig.add_trace(fig2.data[0])
+    fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
+                            mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
+                            showlegend = False)
+    
+    st.plotly_chart(fig, use_container_width=True)
+
+
+    st.write("Soil Temperature 0-7cm, dC")
+    fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='soil_temperature_0_to_7cm', zoom=6.5, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
+    fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":mid_lat, "lon":mid_lon})
+    fig.add_trace(fig2.data[0])
+    fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
+                            mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
+                            showlegend = False)
+    
+    st.plotly_chart(fig, use_container_width=True)
+
+
+    st.write("Soil Moisture 0-7cm, dC")
+    fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='soil_mositure_0_to_7cm', zoom=6.5, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
+    fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":mid_lat, "lon":mid_lon})
+    fig.add_trace(fig2.data[0])
+    fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
+                            mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
+                            showlegend = False)
+    
+    st.plotly_chart(fig, use_container_width=True)
+
+    
+
+
+with col2:
     st.write("Topsoil bulk density, kg/dm-3")
     fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='bulk_den', zoom=6.5, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
     fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":mid_lat, "lon":mid_lon})
@@ -109,20 +146,18 @@ with colph:
     st.plotly_chart(fig, use_container_width=True)
 
 
-with colbulkdensity:
-    st.write("Topsoil pH (in H2O), -log(H+)")
-    fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='ph', zoom=6.5, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
-    #fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":mid_lat, "lon":mid_lon})
-    #fig.add_trace(fig2.data[0])
+    st.write("Avg Yearly Precipitation, (Over 10yrs)")
+    fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='precipitation', zoom=6.5, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
+    fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":mid_lat, "lon":mid_lon})
+    fig.add_trace(fig2.data[0])
     fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
                             mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
                             showlegend = False)
+    
     st.plotly_chart(fig, use_container_width=True)
-    # Show pH plot
 
-    # Plot SOIL BULK DENSITY data from soil data  #54.65270979260174, -2.392090808630309
-    st.write("Topsoil bulk density, kg/dm-3")
-    fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='bulk_den', zoom=6.5, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
+    st.write("Soil Temperature 7-28cm, dC")
+    fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='soil_temperature_7_to_28cm', zoom=6.5, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
     fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":mid_lat, "lon":mid_lon})
     fig.add_trace(fig2.data[0])
     fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
@@ -132,7 +167,18 @@ with colbulkdensity:
     st.plotly_chart(fig, use_container_width=True)
 
 
-vars_to_plot = ['ph', 'bulk_den'] 
+    st.write("Soil Moisture 7-28cm, dC")
+    fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='soil_mositure_7_to_28cm', zoom=6.5, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
+    fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":mid_lat, "lon":mid_lon})
+    fig.add_trace(fig2.data[0])
+    fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
+                            mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
+                            showlegend = False)
+    
+    st.plotly_chart(fig, use_container_width=True)
+
+    
+vars_to_plot = ['ph', 'bulk_den', 'soil_temperature_0_to_7cm' , 'precipitation' ,'soil_temperature_7_to_28cm', 'soil_moisture_0_to_7cm' , 'soil_moisture_7_to_28cm'] 
     
 fig = make_subplots(rows=1, cols=len(vars_to_plot))
 for i, var in enumerate(vars_to_plot):

@@ -4,7 +4,8 @@ import io
 import os
 import streamlit as st
 import plotly.express as px
-from math import pi, cos, radians
+from math import sin, cos, sqrt, atan2, radians, pi
+
 
 st.set_page_config(layout="wide")
 

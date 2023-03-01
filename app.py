@@ -96,8 +96,10 @@ with col1:
     #fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":mid_lat, "lon":mid_lon})
     #fig.add_trace(fig2.data[0])
     fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
-                            mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
-                            showlegend = False)
+                       mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
+                       showlegend = False,
+                       coloraxis_colorbar_title_text = 'pH')
+                      )
     st.plotly_chart(fig, use_container_width=True)
 
     
@@ -106,8 +108,10 @@ with col1:
     fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":mid_lat, "lon":mid_lon})
     fig.add_trace(fig2.data[0])
     fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
-                            mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
-                            showlegend = False)
+                       mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
+                       showlegend = False,
+                       coloraxis_colorbar_title_text = '°C'
+                      )
     
     st.plotly_chart(fig, use_container_width=True)
 
@@ -117,8 +121,10 @@ with col1:
     fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":mid_lat, "lon":mid_lon})
     fig.add_trace(fig2.data[0])
     fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
-                            mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
-                            showlegend = False)
+                       mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
+                       showlegend = False,
+                       coloraxis_colorbar_title_text = '°C'
+                       )
     
     st.plotly_chart(fig, use_container_width=True)
 
@@ -128,8 +134,10 @@ with col1:
     fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":mid_lat, "lon":mid_lon})
     fig.add_trace(fig2.data[0])
     fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
-                            mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
-                            showlegend = False)
+                       mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
+                       showlegend = False,
+                       coloraxis_colorbar_title_text = 'Soil Moisture %'
+                      )
     
     st.plotly_chart(fig, use_container_width=True)
 
@@ -139,8 +147,10 @@ with col1:
     fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":mid_lat, "lon":mid_lon})
     fig.add_trace(fig2.data[0])
     fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
-                            mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
-                            showlegend = False)
+                       mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
+                       showlegend = False,
+                       coloraxis_colorbar_title_text = 'CEC'
+                      )
     
     st.plotly_chart(fig, use_container_width=True)
 
@@ -159,13 +169,15 @@ with col2:
     st.plotly_chart(fig, use_container_width=True)
 
 
-    st.write("Avg Yearly Precipitation, (Over 10yrs)")
+    st.write("Avg Yearly Precipitation (mm/yr), (Over 10yrs)")
     fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='precipitation', zoom=6.5, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
     fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":mid_lat, "lon":mid_lon})
     fig.add_trace(fig2.data[0])
     fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
-                            mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
-                            showlegend = False)
+                       mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
+                       showlegend = False,
+                       coloraxis_colorbar_title_text = 'Precip mm/yr')
+                      )
     
     st.plotly_chart(fig, use_container_width=True)
 
@@ -174,8 +186,10 @@ with col2:
     fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":mid_lat, "lon":mid_lon})
     fig.add_trace(fig2.data[0])
     fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
-                            mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
-                            showlegend = False)
+                       mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
+                       showlegend = False,
+                       coloraxis_colorbar_title_text = 'Temp °C')
+                      )
     
     st.plotly_chart(fig, use_container_width=True)
 
@@ -185,8 +199,10 @@ with col2:
     fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":mid_lat, "lon":mid_lon})
     fig.add_trace(fig2.data[0])
     fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
-                            mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
-                            showlegend = False)
+                       mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
+                       showlegend = False,
+                       coloraxis_colorbar_title_text = 'Moisture %')
+                      )
     
     st.plotly_chart(fig, use_container_width=True)
 
@@ -195,8 +211,10 @@ with col2:
     fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":mid_lat, "lon":mid_lon})
     fig.add_trace(fig2.data[0])
     fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
-                            mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
-                            showlegend = False)
+                       mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
+                       showlegend = False,
+                       coloraxis_colorbar_title_text = '% Cropland')
+                      )
     
     st.plotly_chart(fig, use_container_width=True)
     

@@ -46,17 +46,22 @@ def get_data():
 df = get_data()
 
 
-col1, col2, col3, col4, col5 = st.columns(5)
-with col1:
-    point_lat = st.number_input('Point (lat)', value=55.8852, format="%.6f")
-with col2:
-    point_lon = st.number_input('Point (lon)', value=-3.8819, format="%.6f")
-with col3:
-    chosen_radius = st.slider("Pick radius from the chosen point (km)", 0, 1000, 80)
-with col4:
-    chosen_per_crop = st.slider("Pick a % cropland to use", 0, 100, 25)
-with col5:
-    zoom_level = st.slider("Plot zoom level", 0.0, 10.0, 6.5)
+with st.form(key='starting'):
+
+    col1, col2, col3, col4, col5, col6 = st.columns(6)
+    with col1:
+        point_lat = st.number_input('Point (lat)', value=55.8852, format="%.6f")
+    with col2:
+        point_lon = st.number_input('Point (lon)', value=-3.8819, format="%.6f")
+    with col3:
+        chosen_radius = st.slider("Pick radius from the chosen point (km)", 0, 1000, 80)
+    with col4:
+        chosen_per_crop = st.slider("Pick a % cropland to use", 15, 100, 20)
+    with col5:
+        zoom_level = st.slider("Plot zoom level", 0.0, 10.0, 6.5)
+    with col6:
+        submitted = st.form_submit_button('Run')
+
 
 #make a bounding box around this lat_lon
 df = df[df['latitude'] < point_lat + 20]

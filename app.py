@@ -36,7 +36,8 @@ def getDist(lat1,lon1,lat2,lon2):
 def get_data():
     blob_service_client = BlobServiceClient.from_connection_string(connect_str)
     container_client = blob_service_client.get_container_client("globaldataset")
-    blob_client = container_client.get_blob_client("regridded_data_v5.csv")
+    blob_client = container_client.get_blob_client("cropland_only_global_data.csv")
+    #blob_client = container_client.get_blob_client("regridded_data_v5.csv")
     csv_content = blob_client.download_blob().readall()
     df = pd.read_csv(io.BytesIO(csv_content))
     return df

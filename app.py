@@ -103,16 +103,16 @@ with col1:
     st.plotly_chart(fig, use_container_width=True)
 
     
-    st.write("Temperature at 2m, dC")
-    fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='temperature_2m', zoom=zoom_level, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
-    fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":mid_lat, "lon":mid_lon})
-    fig.add_trace(fig2.data[0])
-    fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
-                       mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
-                       showlegend = False,
-                       coloraxis_colorbar_title_text = '°C')
-    
-    st.plotly_chart(fig, use_container_width=True)
+    #st.write("Temperature at 2m, dC")
+    #fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='temperature_2m', zoom=zoom_level, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
+    #fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":mid_lat, "lon":mid_lon})
+    #fig.add_trace(fig2.data[0])
+    #fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
+    #                   mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
+    #                   showlegend = False,
+    #                   coloraxis_colorbar_title_text = '°C')
+    #
+    #st.plotly_chart(fig, use_container_width=True)
 
 
     st.write("Soil Temperature 0-7cm, dC")
@@ -123,18 +123,6 @@ with col1:
                        mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
                        showlegend = False,
                        coloraxis_colorbar_title_text = '°C')
-    
-    st.plotly_chart(fig, use_container_width=True)
-
-
-    st.write("Soil Moisture 0-7cm, dC")
-    fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='soil_moisture_0_to_7cm', zoom=zoom_level, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
-    fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":mid_lat, "lon":mid_lon})
-    fig.add_trace(fig2.data[0])
-    fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
-                       mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
-                       showlegend = False,
-                       coloraxis_colorbar_title_text = '%')
     
     st.plotly_chart(fig, use_container_width=True)
 
@@ -176,20 +164,8 @@ with col2:
     
     st.plotly_chart(fig, use_container_width=True)
 
-    st.write("Soil Temperature 7-28cm, dC")
-    fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='soil_temperature_7_to_28cm', zoom=zoom_level, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
-    fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":mid_lat, "lon":mid_lon})
-    fig.add_trace(fig2.data[0])
-    fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
-                       mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
-                       showlegend = False,
-                       coloraxis_colorbar_title_text = '°C')
-    
-    st.plotly_chart(fig, use_container_width=True)
-
-
-    st.write("Soil Moisture 7-28cm, dC")
-    fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='soil_moisture_7_to_28cm', zoom=zoom_level, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
+    st.write("Soil Moisture 0-7cm, dC")
+    fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='soil_moisture_0_to_7cm', zoom=zoom_level, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
     fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":mid_lat, "lon":mid_lon})
     fig.add_trace(fig2.data[0])
     fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
@@ -198,6 +174,30 @@ with col2:
                        coloraxis_colorbar_title_text = '%')
     
     st.plotly_chart(fig, use_container_width=True)
+
+    
+    #st.write("Soil Temperature 7-28cm, dC")
+    #fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='soil_temperature_7_to_28cm', zoom=zoom_level, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
+    #fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":mid_lat, "lon":mid_lon})
+    #fig.add_trace(fig2.data[0])
+    #fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
+    #                   mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
+    #                   showlegend = False,
+    #                   coloraxis_colorbar_title_text = '°C')
+    #
+    #st.plotly_chart(fig, use_container_width=True)
+
+
+    #st.write("Soil Moisture 7-28cm, dC")
+    #fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='soil_moisture_7_to_28cm', zoom=zoom_level, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
+    #fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":mid_lat, "lon":mid_lon})
+    #fig.add_trace(fig2.data[0])
+    #fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
+    #                   mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
+    #                   showlegend = False,
+    #                   coloraxis_colorbar_title_text = '%')
+    #
+    #st.plotly_chart(fig, use_container_width=True)
 
     st.write("% Cropland")
     fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='is_crop', zoom=zoom_level, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")

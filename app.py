@@ -156,7 +156,7 @@ fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
 
 st.plotly_chart(fig, use_container_width=True)
 
-df['precip_mean_weighted'] = (df['precipitation']*df['is_crop']).sum()/df['is_crop'].sum()
+precip_mean_weighted = (df['precipitation']*df['is_crop']).sum()/df['is_crop'].sum()
 st.write(precip_mean_weighted)
 vars_to_plot = ['ph', 'bulk_den', 'soil_temperature_0_to_7cm' , 'precipitation' ,'soil_temperature_7_to_28cm', 'soil_moisture_0_to_7cm' , 'soil_moisture_7_to_28cm', 'cec', 'is_crop'] 
     

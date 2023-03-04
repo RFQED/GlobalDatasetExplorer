@@ -61,7 +61,8 @@ with st.form(key='starting'):
         zoom_level = st.slider("Plot zoom level", 0.0, 10.0, 6.5)
     with col6:
         submitted = st.form_submit_button('Run')
-
+        weighted_avg = st.checkbox('Calculated weighted average using cropland % weight')
+        
 
 #make a bounding box around this lat_lon
 df = df[df['latitude'] < point_lat + 20]
@@ -108,19 +109,6 @@ with col1:
                        coloraxis_colorbar_title_text = 'pH')
     st.plotly_chart(fig, use_container_width=True)
 
-    
-    #st.write("Temperature at 2m, dC")
-    #fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='temperature_2m', zoom=zoom_level, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
-    #fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":mid_lat, "lon":mid_lon})
-    #fig.add_trace(fig2.data[0])
-    #fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
-    #                   mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
-    #                   showlegend = False,
-    #                   coloraxis_colorbar_title_text = '°C')
-    #
-    #st.plotly_chart(fig, use_container_width=True)
-
-
     st.write("Soil Temperature 0-7cm, dC")
     fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='soil_temperature_0_to_7cm', zoom=zoom_level, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
     fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":mid_lat, "lon":mid_lon})
@@ -132,33 +120,7 @@ with col1:
     
     st.plotly_chart(fig, use_container_width=True)
 
-
-    #st.write("CEC, ???")
-    #fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='cec', zoom=zoom_level, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
-    #fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":mid_lat, "lon":mid_lon})
-    #fig.add_trace(fig2.data[0])
-    #fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
-    #                   mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
-    #                   showlegend = False,
-    #                   coloraxis_colorbar_title_text = 'CEC')
-    #
-    #st.plotly_chart(fig, use_container_width=True)
-
-    
-
-
 with col2:
-    #st.write("Topsoil bulk density, kg/dm-3")
-    #fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='bulk_den', zoom=zoom_level, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
-    #fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":mid_lat, "lon":mid_lon})
-    #fig.add_trace(fig2.data[0])
-    #fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
-    #                   mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
-    #                   showlegend = False,
-    #                   coloraxis_colorbar_title_text = 'Bulk Density')
-    #st.plotly_chart(fig, use_container_width=True)
-
-
     st.write("Avg Yearly Precipitation (mm/yr), (Over 10yrs)")
     fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='precipitation', zoom=zoom_level, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
     fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":mid_lat, "lon":mid_lon})
@@ -181,29 +143,7 @@ with col2:
     
     st.plotly_chart(fig, use_container_width=True)
 
-    
-    #st.write("Soil Temperature 7-28cm, dC")
-    #fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='soil_temperature_7_to_28cm', zoom=zoom_level, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
-    #fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":mid_lat, "lon":mid_lon})
-    #fig.add_trace(fig2.data[0])
-    #fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
-    #                   mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
-    #                   showlegend = False,
-    #                   coloraxis_colorbar_title_text = '°C')
-    #
-    #st.plotly_chart(fig, use_container_width=True)
 
-
-    #st.write("Soil Moisture 7-28cm, dC")
-    #fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='soil_moisture_7_to_28cm', zoom=zoom_level, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
-    #fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":mid_lat, "lon":mid_lon})
-    #fig.add_trace(fig2.data[0])
-    #fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
-    #                   mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
-    #                   showlegend = False,
-    #                   coloraxis_colorbar_title_text = '%')
-    #
-    #st.plotly_chart(fig, use_container_width=True)
 
 st.write("% Cropland")
 fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='is_crop', zoom=zoom_level, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
@@ -217,6 +157,9 @@ fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
 st.plotly_chart(fig, use_container_width=True)
 
     
+#df['is_crop_weight'] = df['is_crop']/df['is_crop'].sum()
+precip_mean_weighted = (df['precipitation']*df['is_crop']).sum()/df['is_crop'].sum()
+st.write(precip_mean_weighted)
 vars_to_plot = ['ph', 'bulk_den', 'soil_temperature_0_to_7cm' , 'precipitation' ,'soil_temperature_7_to_28cm', 'soil_moisture_0_to_7cm' , 'soil_moisture_7_to_28cm', 'cec', 'is_crop'] 
     
 fig = make_subplots(rows=1, cols=len(vars_to_plot))

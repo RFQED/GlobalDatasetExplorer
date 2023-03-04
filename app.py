@@ -157,7 +157,15 @@ fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
 st.plotly_chart(fig, use_container_width=True)
 
 precip_mean_weighted = (df['precipitation']*df['is_crop']).sum()/df['is_crop'].sum()
+ph_mean_weighted = (df['ph']*df['is_crop']).sum()/df['is_crop'].sum()
+soil_temp_mean_weighted = (df['soil_temperature_7_to_28cm']*df['is_crop']).sum()/df['is_crop'].sum()
+soil_moisture_weighted = (df['soil_moisture_0_to_7cm']*df['is_crop']).sum()/df['is_crop'].sum()
+
 st.write(precip_mean_weighted)
+st.write(ph_mean_weighted)
+st.write(soil_temp_mean_weighted)
+st.write(soil_moisture_weighted)
+
 vars_to_plot = ['ph', 'bulk_den', 'soil_temperature_0_to_7cm' , 'precipitation' ,'soil_temperature_7_to_28cm', 'soil_moisture_0_to_7cm' , 'soil_moisture_7_to_28cm', 'cec', 'is_crop'] 
     
 fig = make_subplots(rows=1, cols=len(vars_to_plot))

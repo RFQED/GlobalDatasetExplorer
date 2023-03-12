@@ -37,8 +37,9 @@ def get_data():
     #blob_client = container_client.get_blob_client("regridded_data_v5.csv")
     csv_content = blob_client.download_blob().readall()
     df = pd.read_csv(io.BytesIO(csv_content))
+    #change precip to int
+    df = df.astype({'precipitation':'int'})
     return df
-
 
 df = get_data()
 
@@ -73,11 +74,10 @@ df = df[df['is_crop'] > chosen_per_crop]
 #filter by distance
 df = filter_data_quarry_distance(df, point_lat, point_lon, chosen_radius)
 
-#change precip to int
-df = df.astype({'precipitation':'int'})
+
 
 #remove unwanted cols
-df = df.drop(["is_soil", "Unnamed: 0"], axis=1, inplace=True)
+#df = df.drop(["is_soil"], axis=1, inplace=True)
 
 chosen_point_data = [[point_lat, point_lon, 100]]
 df_chosen_point = pd.DataFrame(chosen_point_data, columns=['lat', 'lon', 'size'])

@@ -81,8 +81,8 @@ df_chosen_point = pd.DataFrame(chosen_point_data, columns=['lat', 'lon', 'size']
 df['soil temp 0-7cm'] = df['soil_temperature_0_to_7cm']
 df['soil temp 7-28cm'] = df['soil_temperature_7_to_28cm']
 
-df['waterfilledporosity'] = ((df['soil_moisture_0_to_7cm'] + df['soil_moisture_7_to_28cm'])/2) * df['bulk_den']
-df['waterfilledporosity'] = np.round(df['waterfilledporosity'],decimals = 3)
+df['water_filled_porosity'] = ((df['soil_moisture_0_to_7cm'] + df['soil_moisture_7_to_28cm'])/2) * df['bulk_den']
+df['water_filled_porosity'] = np.round(df['water_filled_porosity'],decimals = 3)
 #,longitude,latitude,precipitation,temperature_2m,soil_temperature_0_to_7cm,soil_temperature_7_to_28cm,soil_moisture_0_to_7cm,soil_moisture_7_to_28cm,ph,cec,bulk_den,is_soil,is_crop
 
 col1, col2 = st.columns(2)
@@ -146,7 +146,7 @@ with col2:
 
 
     st.write("Water Filled Porosity")
-    fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='WaterFilledPorosity', zoom=zoom_level, center={"lat":point_lat, "lon":point_lon}, color_continuous_scale="inferno")
+    fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='water_filled_porosity', zoom=zoom_level, center={"lat":point_lat, "lon":point_lon}, color_continuous_scale="inferno")
     fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":point_lat, "lon":point_lon})
     fig.add_trace(fig2.data[0])
     fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
@@ -170,7 +170,7 @@ with col2:
 
 st.header("Final values from dataset")
 
-vars_to_plot = ['ph', 'bulk_den', 'precipitation', 'soil_temperature_0_to_7cm' , 'soil_temperature_7_to_28cm', 'soil_moisture_0_to_7cm' , 'soil_moisture_7_to_28cm', 'cec', 'is_crop', 'WaterFilledPorosity'] 
+vars_to_plot = ['ph', 'bulk_den', 'precipitation', 'soil_temperature_0_to_7cm' , 'soil_temperature_7_to_28cm', 'soil_moisture_0_to_7cm' , 'soil_moisture_7_to_28cm', 'cec', 'is_crop', 'water_filled_porosity'] 
     
 fig = make_subplots(rows=1, cols=len(vars_to_plot))
 for i, var in enumerate(vars_to_plot):
@@ -207,7 +207,7 @@ with col8:
   st.metric("Mean cec", round(df['cec'].mean(),2), "cmol per kg", delta_color="off")
 
 with col9:
-  st.metric("Mean water filled porosity", round(df['waterfilledporosity'].mean(),2), "L porewater / L soil", delta_color="off")
+  st.metric("Mean water filled porosity", round(df['water_filled_porosity'].mean(),2), "L porewater / L soil", delta_color="off")
 
 
 
@@ -220,7 +220,7 @@ soil_temp_mean_weighted7_28 = (df['soil_temperature_7_to_28cm']*df['is_crop']).s
 soil_moisture_mean_weighted0_7 = (df['soil_moisture_0_to_7cm']*df['is_crop']).sum()/df['is_crop'].sum()
 soil_moisture_mean_weighted7_28 = (df['soil_moisture_7_to_28cm']*df['is_crop']).sum()/df['is_crop'].sum()
 cec_weighted = (df['cec']*df['is_crop']).sum()/df['is_crop'].sum()
-waterfilledporosity_weighted = (df['waterfilledporosity']*df['is_crop']).sum()/df['is_crop'].sum()
+water_filled_porosity_weighted = (df['water_filled_porosity']*df['is_crop']).sum()/df['is_crop'].sum()
 
 col1, col2, col3, col4, col5, col6, col7, col8, col9 = st.columns(9)
 
@@ -249,4 +249,4 @@ with col8:
   st.metric("Weighted cec", round(cec_weighted, 2), "cmol per kg", delta_color="off")
 
 with col9:
-  st.metric("Weighted water filled porosity", round(waterfilledporosity_weighted, 2), "L porewater / L soil", delta_color="off")
+  st.metric("Weighted water filled porosity", round(water_filled_porosity_weighted, 2), "L porewater / L soil", delta_color="off")

@@ -81,8 +81,8 @@ df_chosen_point = pd.DataFrame(chosen_point_data, columns=['lat', 'lon', 'size']
 df['soil temp 0-7cm'] = df['soil_temperature_0_to_7cm']
 df['soil temp 7-28cm'] = df['soil_temperature_7_to_28cm']
 
-df['WaterFilledPorosity'] = ((df['soil_moisture_0_to_7cm'] + df['soil_moisture_7_to_28cm'])/2) * df['bulk_den']
-df['WaterFilledPorosity'] = np.round(df['WaterFilledPorosity'],decimals = 3)
+df['waterfilledporosity'] = ((df['soil_moisture_0_to_7cm'] + df['soil_moisture_7_to_28cm'])/2) * df['bulk_den']
+df['waterfilledporosity'] = np.round(df['waterfilledporosity'],decimals = 3)
 #,longitude,latitude,precipitation,temperature_2m,soil_temperature_0_to_7cm,soil_temperature_7_to_28cm,soil_moisture_0_to_7cm,soil_moisture_7_to_28cm,ph,cec,bulk_den,is_soil,is_crop
 
 col1, col2 = st.columns(2)
@@ -207,7 +207,7 @@ with col8:
   st.metric("Mean cec", round(df['cec'].mean(),2), "cmol per kg", delta_color="off")
 
 with col9:
-  st.metric("Mean water filled porosity", round(df['WaterFilledPorosity'].mean(),2), "L porewater / L soil", delta_color="off")
+  st.metric("Mean water filled porosity", round(df['waterfilledporosity'].mean(),2), "L porewater / L soil", delta_color="off")
 
 
 
@@ -220,7 +220,7 @@ soil_temp_mean_weighted7_28 = (df['soil_temperature_7_to_28cm']*df['is_crop']).s
 soil_moisture_mean_weighted0_7 = (df['soil_moisture_0_to_7cm']*df['is_crop']).sum()/df['is_crop'].sum()
 soil_moisture_mean_weighted7_28 = (df['soil_moisture_7_to_28cm']*df['is_crop']).sum()/df['is_crop'].sum()
 cec_weighted = (df['cec']*df['is_crop']).sum()/df['is_crop'].sum()
-waterfilledporosity_weighted = (df['WaterFilledPorosity']*df['is_crop']).sum()/df['is_crop'].sum()
+waterfilledporosity_weighted = (df['waterfilledporosity']*df['is_crop']).sum()/df['is_crop'].sum()
 
 col1, col2, col3, col4, col5, col6, col7, col8, col9 = st.columns(9)
 

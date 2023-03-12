@@ -240,10 +240,10 @@ with col5:
   st.metric("Weighted soil_temperature_7_to_28cm", round(soil_temp_mean_weighted7_28, 2), "°C", delta_color="off")
   
 with col6:
-  st.metric("Weighted soil_moisture_0_to_7cm", round(soil_moisture_mean_weighted0_7, 2), "°C", delta_color="off")
+  st.metric("Weighted soil_moisture_0_to_7cm", round(soil_moisture_mean_weighted0_7, 2), "m3 m-3", delta_color="off")
 
 with col7:
-  st.metric("Weighted soil_moisture_7_to_28cm", round(soil_moisture_mean_weighted7_28, 2), "°C", delta_color="off")
+  st.metric("Weighted soil_moisture_7_to_28cm", round(soil_moisture_mean_weighted7_28, 2), "m3 m-3", delta_color="off")
 
 with col8:
   st.metric("Weighted cec", round(cec_weighted, 2), "cmol per kg", delta_color="off")

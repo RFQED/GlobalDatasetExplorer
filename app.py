@@ -180,7 +180,7 @@ fig.update_traces(boxpoints='all', jitter=.3)
 fig.update_layout(height=750)
 st.plotly_chart(fig, use_container_width=True)
 
-col1, col2, col3, col4, col5, col6, col7, col8, col9, col10 = st.columns(10)
+col1, col2, col3, col4, col5, col6, col7, col8, col9 = st.columns(9)
 
 with col1:
   st.metric("Mean ph", round(df['ph'].mean(),2), "", delta_color="off")

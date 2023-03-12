@@ -90,8 +90,8 @@ col1, col2 = st.columns(2)
 with col1:
     st.write("Topsoil pH (in H2O), -log(H+)")
     fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='ph', zoom=zoom_level, center={"lat":point_lat, "lon":point_lon}, color_continuous_scale="inferno")
-    #fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":point_lat, "lon":point_lon})
-    #fig.add_trace(fig2.data[0])
+    fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":point_lat, "lon":point_lon})
+    fig.add_trace(fig2.data[0])
     fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
                        mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
                        showlegend = False,
@@ -177,3 +177,9 @@ for i, var in enumerate(vars_to_plot):
 fig.update_traces(boxpoints='all', jitter=.3)
 fig.update_layout(height=750)
 st.plotly_chart(fig, use_container_width=True)
+
+
+col1, col2, col3, col4, col5, col6 = st.columns(6)
+
+with col1:
+  st.metric("Mean Precip", df['precipitation'].mean())

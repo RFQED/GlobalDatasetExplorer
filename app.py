@@ -244,3 +244,5 @@ with col8:
   
 with col9:
   st.metric("Weighted water filled porosity", round(water_filled_porosity_weighted, 2), "L porewater / L soil", delta_color="off")
+
+  

@@ -59,7 +59,6 @@ with st.form(key='starting'):
         zoom_level = st.slider("Plot zoom level", 0.0, 10.0, 6.5)
     with col6:
         submitted = st.form_submit_button('Run')
-        weighted_avg = st.checkbox('Calculated weighted average using cropland % weight')
         
 
 # reduce dataframe to just around the point

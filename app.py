@@ -3,11 +3,14 @@ from azure.storage.blob import BlobServiceClient
 import io
 import os
 import streamlit as st
-import plotly.express as px
 from math import sin, cos, sqrt, atan2, radians, pi
-import plotly
+
+import plotly #TODO clean up all plotly imports
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
+import plotly.express as px
+
+import h3
 
 st.set_page_config(layout="wide")
 
@@ -30,6 +33,15 @@ def getDist(lat1,lon1,lat2,lon2):
   c = 2 * atan2(sqrt(a), sqrt(1 - a))
 
   return R * c
+
+def filter_data_quarry_distance(data: pd.DataFrame, base_lat, base_lng, max_distance) -> pd.DataFrame:
+    def check_distance(latlng: np.ndarray) -> bool:
+        distance = h3.great_circle_distance((base_lat, base_lng), latlng, unit="km")
+        return distance <= max_distance
+
+    mask = data[["latitude", "longitude"]].apply(axis=1, raw=True, func=check_distance)
+
+    return data[mask]
 
 
 @st.cache_data(show_spinner="Fetching data from Azure...")
@@ -65,18 +77,21 @@ with st.form(key='starting'):
         
 
 #make a bounding box around this lat_lon
-df = df[df['latitude'] < point_lat + 20]
-df = df[df['latitude'] > point_lat - 20]
+#df = df[df['latitude'] < point_lat + 20]
+#df = df[df['latitude'] > point_lat - 20]
 
-df = df[df['longitude'] < point_lon + 20]
-df = df[df['longitude'] > point_lon - 20]
+#df = df[df['longitude'] < point_lon + 20]
+#df = df[df['longitude'] > point_lon - 20]
 
 
 #Apply distance function to dataframe
-df['dist']=list(map(lambda k: getDist(df.loc[k]['latitude'],df.loc[k]['longitude'], point_lat, point_lon), df.index))
-df = df[df['dist'] < chosen_radius]
+#df['dist']=list(map(lambda k: getDist(df.loc[k]['latitude'],df.loc[k]['longitude'], point_lat, point_lon), df.index))
+#df = df[df['dist'] < chosen_radius]
 
 df = df[df['is_crop'] > chosen_per_crop]
+
+df = filter_data_quarry_distance(df, point_lat, point_lon, chosen_radius)
+
 
 r_earth = 6373.0
 lat_low  = point_lat - (chosen_radius / r_earth) * (180 / pi);

@@ -170,7 +170,7 @@ with col2:
 
 st.header("Final values from dataset")
 
-vars_to_plot = ['ph', 'bulk_den', 'precipitation', 'soil_temperature_0_to_7cm' , 'soil_temperature_7_to_28cm', 'soil_moisture_0_to_7cm' , 'soil_moisture_7_to_28cm', 'cec', 'is_crop'] 
+vars_to_plot = ['ph', 'bulk_den', 'precipitation', 'soil_temperature_0_to_7cm' , 'soil_temperature_7_to_28cm', 'soil_moisture_0_to_7cm' , 'soil_moisture_7_to_28cm', 'cec', 'is_crop', 'WaterFilledPorosity'] 
     
 fig = make_subplots(rows=1, cols=len(vars_to_plot))
 for i, var in enumerate(vars_to_plot):
@@ -180,7 +180,7 @@ fig.update_traces(boxpoints='all', jitter=.3)
 fig.update_layout(height=750)
 st.plotly_chart(fig, use_container_width=True)
 
-col1, col2, col3, col4, col5, col6, col7, col8, col9 = st.columns(9)
+col1, col2, col3, col4, col5, col6, col7, col8, col9, col10 = st.columns(10)
 
 with col1:
   st.metric("Mean ph", round(df['ph'].mean(),2), "", delta_color="off")
@@ -206,9 +206,12 @@ with col7:
 with col8:
   st.metric("Mean cec", round(df['cec'].mean(),2), "cmol per kg", delta_color="off")
 
+with col9:
+  st.metric("Mean water filled porosity", round(df['WaterFilledPorosity'].mean(),2), "L porewater / L soil", delta_color="off")
 
 
-st.header("Weighted values from dataset")
+
+st.header("Mean values from dataset, weighted by crop %")
 ph_mean_weighted = (df['ph']*df['is_crop']).sum()/df['is_crop'].sum()
 bulk_den_mean_weighted = (df['bulk_den']*df['is_crop']).sum()/df['is_crop'].sum()
 precip_mean_weighted = (df['precipitation']*df['is_crop']).sum()/df['is_crop'].sum()
@@ -217,6 +220,7 @@ soil_temp_mean_weighted7_28 = (df['soil_temperature_7_to_28cm']*df['is_crop']).s
 soil_moisture_mean_weighted0_7 = (df['soil_moisture_0_to_7cm']*df['is_crop']).sum()/df['is_crop'].sum()
 soil_moisture_mean_weighted7_28 = (df['soil_moisture_7_to_28cm']*df['is_crop']).sum()/df['is_crop'].sum()
 cec_weighted = (df['cec']*df['is_crop']).sum()/df['is_crop'].sum()
+waterfilledporosity_weighted = (df['WaterFilledPorosity']*df['is_crop']).sum()/df['is_crop'].sum()
 
 col1, col2, col3, col4, col5, col6, col7, col8, col9 = st.columns(9)
 
@@ -243,3 +247,6 @@ with col7:
 
 with col8:
   st.metric("Mean cec", round(cec_weighted, 2), "cmol per kg", delta_color="off")
+
+with col9:
+  st.metric("Mean water filled porosity", round(waterfilledporosity_weighted, 2), "L porewater / L soil", delta_color="off")

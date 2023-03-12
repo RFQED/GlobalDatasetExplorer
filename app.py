@@ -168,6 +168,8 @@ with col2:
 # st.write(soil_moisture_weighted)
 # st.write(cec_weighted)
 
+st.header("Final values from dataset")
+
 vars_to_plot = ['ph', 'bulk_den', 'precipitation', 'soil_temperature_0_to_7cm' , 'soil_temperature_7_to_28cm', 'soil_moisture_0_to_7cm' , 'soil_moisture_7_to_28cm', 'cec', 'is_crop'] 
     
 fig = make_subplots(rows=1, cols=len(vars_to_plot))
@@ -177,7 +179,6 @@ for i, var in enumerate(vars_to_plot):
 fig.update_traces(boxpoints='all', jitter=.3)
 fig.update_layout(height=750)
 st.plotly_chart(fig, use_container_width=True)
-
 
 col1, col2, col3, col4, col5, col6, col7, col8, col9 = st.columns(9)
 
@@ -205,3 +206,40 @@ with col7:
 with col8:
   st.metric("Mean cec", round(df['cec'].mean(),2), "cmol per kg", delta_color="off")
 
+
+
+st.header("Weighted values from dataset")
+ph_mean_weighted = (df['ph']*df['is_crop']).sum()/df['is_crop'].sum()
+bulk_den_mean_weighted = (df['bulk_den']*df['is_crop']).sum()/df['is_crop'].sum()
+precip_mean_weighted = (df['precipitation']*df['is_crop']).sum()/df['is_crop'].sum()
+soil_temp_mean_weighted0_7 = (df['soil_temperature_0_to_7cm']*df['is_crop']).sum()/df['is_crop'].sum()
+soil_temp_mean_weighted7_28 = (df['soil_temperature_7_to_28cm']*df['is_crop']).sum()/df['is_crop'].sum()
+soil_moisture_mean_weighted0_7 = (df['soil_moisture_0_to_7cm']*df['is_crop']).sum()/df['is_crop'].sum()
+soil_moisture_mean_weighted7_28 = (df['soil_moisture_7_to_28cm']*df['is_crop']).sum()/df['is_crop'].sum()
+cec_weighted = (df['cec']*df['is_crop']).sum()/df['is_crop'].sum()
+
+col1, col2, col3, col4, col5, col6, col7, col8, col9 = st.columns(9)
+
+with col1:
+  st.metric("Weighted mean ph", ph_mean_weighted, "", delta_color="off")
+
+with col2:
+  st.metric("Mean bulk_den", bulk_den_mean_weighted, "kg dm-3", delta_color="off")
+
+with col3:
+  st.metric("Mean Precip", precip_mean_weighted, "mm/yr", delta_color="off")
+
+with col4:
+  st.metric("Mean soil_temperature_0_to_7cm", soil_temp_mean_weighted0_7, "°C", delta_color="off")
+
+with col5:
+  st.metric("Mean soil_temperature_7_to_28cm", soil_temp_mean_weighted7_28, "°C", delta_color="off")
+  
+with col6:
+  st.metric("Mean soil_moisture_0_to_7cm", soil_moisture_mean_weighted0_7, "°C", delta_color="off")
+
+with col7:
+  st.metric("Mean soil_moisture_7_to_28cm", soil_moisture_mean_weighted7_28, "°C", delta_color="off")
+
+with col8:
+  st.metric("Mean cec", cec_weighted, "cmol per kg", delta_color="off")

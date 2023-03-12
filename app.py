@@ -81,6 +81,7 @@ df_chosen_point = pd.DataFrame(chosen_point_data, columns=['lat', 'lon', 'size']
 df['soil temp 0-7cm'] = df['soil_temperature_0_to_7cm']
 df['soil temp 7-28cm'] = df['soil_temperature_7_to_28cm']
 
+df['WaterFilledPorosity'] = ((df['soil_moisture_0_to_7cm'] + df['soil_moisture_7_to_28cm'])/2) * df['bulk_den']
 #,longitude,latitude,precipitation,temperature_2m,soil_temperature_0_to_7cm,soil_temperature_7_to_28cm,soil_moisture_0_to_7cm,soil_moisture_7_to_28cm,ph,cec,bulk_den,is_soil,is_crop
 
 col1, col2 = st.columns(2)
@@ -107,6 +108,18 @@ with col1:
     
     st.plotly_chart(fig, use_container_width=True)
 
+    st.write("% Cropland")
+    fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='is_crop', zoom=zoom_level, center={"lat":point_lat, "lon":point_lon}, color_continuous_scale="inferno")
+    fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":point_lat, "lon":point_lon})
+    fig.add_trace(fig2.data[0])
+    fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
+                       mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
+                       showlegend = False,
+                       coloraxis_colorbar_title_text = '% Cropland')
+    
+    st.plotly_chart(fig, use_container_width=True)
+
+    
 with col2:
     st.write("Avg Yearly Precipitation (mm/yr), (Over 10yrs)")
     fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='precipitation', zoom=zoom_level, center={"lat":point_lat, "lon":point_lon}, color_continuous_scale="inferno")
@@ -131,17 +144,16 @@ with col2:
     st.plotly_chart(fig, use_container_width=True)
 
 
-
-st.write("% Cropland")
-fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='is_crop', zoom=zoom_level, center={"lat":point_lat, "lon":point_lon}, color_continuous_scale="inferno")
-fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":point_lat, "lon":point_lon})
-fig.add_trace(fig2.data[0])
-fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
-                   mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
-                   showlegend = False,
-                   coloraxis_colorbar_title_text = '% Cropland')
-
-st.plotly_chart(fig, use_container_width=True)
+    st.write("Water Filled Porosity")
+    fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='WaterFilledPorosity', zoom=zoom_level, center={"lat":point_lat, "lon":point_lon}, color_continuous_scale="inferno")
+    fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":point_lat, "lon":point_lon})
+    fig.add_trace(fig2.data[0])
+    fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
+                       mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
+                       showlegend = False,
+                       coloraxis_colorbar_title_text = 'L_pw / L_soil')
+    
+    st.plotly_chart(fig, use_container_width=True)
 
 # precip_mean_weighted = (df['precipitation']*df['is_crop']).sum()/df['is_crop'].sum()
 # ph_mean_weighted = (df['ph']*df['is_crop']).sum()/df['is_crop'].sum()

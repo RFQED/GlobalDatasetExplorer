@@ -39,13 +39,13 @@ def get_data():
     df = pd.read_csv(io.BytesIO(csv_content))
     #change precip to int
     df = df.astype({'precipitation':'int'})
+    df = df.drop(columns=['is_soil'])
     return df
 
 df = get_data()
 
 
 with st.form(key='starting'):
-
     col1, col2, col3, col4, col5, col6 = st.columns(6)
     with col1:
         point_lat = st.number_input('Point (lat)', value=55.8852, format="%.6f")
@@ -69,15 +69,11 @@ df = df[df['latitude'] > point_lat - 20]
 df = df[df['longitude'] < point_lon + 20]
 df = df[df['longitude'] > point_lon - 20]
 
+# cut on cropland %
 df = df[df['is_crop'] > chosen_per_crop]
 
 #filter by distance
 df = filter_data_quarry_distance(df, point_lat, point_lon, chosen_radius)
-
-
-
-#remove unwanted cols
-#df = df.drop(["is_soil"], axis=1, inplace=True)
 
 chosen_point_data = [[point_lat, point_lon, 100]]
 df_chosen_point = pd.DataFrame(chosen_point_data, columns=['lat', 'lon', 'size'])

@@ -1,6 +1,6 @@
 plotly
 pandas
 azure-storage-blob
-h3
+h3==4.0.0b2
 streamlit
 numpy

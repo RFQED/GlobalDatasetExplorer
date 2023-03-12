@@ -82,6 +82,7 @@ df['soil temp 0-7cm'] = df['soil_temperature_0_to_7cm']
 df['soil temp 7-28cm'] = df['soil_temperature_7_to_28cm']
 
 df['WaterFilledPorosity'] = ((df['soil_moisture_0_to_7cm'] + df['soil_moisture_7_to_28cm'])/2) * df['bulk_den']
+df['WaterFilledPorosity'] = df.round({'WaterFilledPorosity': 3})
 #,longitude,latitude,precipitation,temperature_2m,soil_temperature_0_to_7cm,soil_temperature_7_to_28cm,soil_moisture_0_to_7cm,soil_moisture_7_to_28cm,ph,cec,bulk_den,is_soil,is_crop
 
 col1, col2 = st.columns(2)

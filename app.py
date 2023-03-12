@@ -182,26 +182,26 @@ st.plotly_chart(fig, use_container_width=True)
 col1, col2, col3, col4, col5, col6, col7, col8, col9 = st.columns(9)
 
 with col1:
-  st.metric("Mean ph", round(df['ph'].mean(),0), "", delta_color="off")
+  st.metric("Mean ph", round(df['ph'].mean(),2), "", delta_color="off")
 
 with col2:
-  st.metric("Mean bulk_den", round(df['bulk_den'].mean(),0), "kg dm-3", delta_color="off")
+  st.metric("Mean bulk_den", round(df['bulk_den'].mean(),2), "kg dm-3", delta_color="off")
 
 with col3:
   st.metric("Mean Precip", round(df['precipitation'].mean(),0), "mm/yr", delta_color="off")
 
 with col4:
-  st.metric("Mean soil_temperature_0_to_7cm", round(df['soil_temperature_0_to_7cm'].mean(),0), "°C", delta_color="off")
+  st.metric("Mean soil_temperature_0_to_7cm", round(df['soil_temperature_0_to_7cm'].mean(),2), "°C", delta_color="off")
 
 with col5:
-  st.metric("Mean soil_temperature_7_to_28cm", round(df['soil_temperature_7_to_28cm'].mean(),0), "°C", delta_color="off")
+  st.metric("Mean soil_temperature_7_to_28cm", round(df['soil_temperature_7_to_28cm'].mean(),2), "°C", delta_color="off")
   
 with col6:
-  st.metric("Mean soil_moisture_0_to_7cm", round(df['soil_moisture_0_to_7cm'].mean(),0), "°C", delta_color="off")
+  st.metric("Mean soil_moisture_0_to_7cm", round(df['soil_moisture_0_to_7cm'].mean(),2), "°C", delta_color="off")
 
 with col7:
-  st.metric("Mean soil_moisture_7_to_28cm", round(df['soil_moisture_7_to_28cm'].mean(),0), "°C", delta_color="off")
+  st.metric("Mean soil_moisture_7_to_28cm", round(df['soil_moisture_7_to_28cm'].mean(),2), "°C", delta_color="off")
 
 with col8:
-  st.metric("Mean cec", round(df['cec'].mean(),0), "cmol per kg", delta_color="off")
+  st.metric("Mean cec", round(df['cec'].mean(),2), "cmol per kg", delta_color="off")
 

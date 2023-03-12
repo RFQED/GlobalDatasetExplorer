@@ -212,6 +212,7 @@ soil_temp_mean_weighted7_28 = (df['soil_temperature_7_to_28cm']*df['is_crop']).s
 soil_moisture_mean_weighted0_7 = (df['soil_moisture_0_to_7cm']*df['is_crop']).sum()/df['is_crop'].sum()
 soil_moisture_mean_weighted7_28 = (df['soil_moisture_7_to_28cm']*df['is_crop']).sum()/df['is_crop'].sum()
 cec_weighted = (df['cec']*df['is_crop']).sum()/df['is_crop'].sum()
+cec_eqL_weighted = (df['cec_eqL']*df['is_crop']).sum()/df['is_crop'].sum()
 water_filled_porosity_weighted = (df['water_filled_porosity']*df['is_crop']).sum()/df['is_crop'].sum()
 
 col1, col2, col3, col4, col5, col6, col7, col8, col9 = st.columns(9)
@@ -238,7 +239,8 @@ with col7:
   st.metric("Weighted soil_moisture_7_to_28cm", round(soil_moisture_mean_weighted7_28, 2), "m3 m-3", delta_color="off")
 
 with col8:
-  st.metric("Weighted cec", round(cec_weighted, 2), "cmol per kg", delta_color="off")
-
+  st.metric("Weighted CEC", round(cec_weighted, 2), "cmol per kg", delta_color="off")
+  st.metric("Weighted CEC", round(cec_eqL_weighted,2), "eqL", delta_color="off")
+  
 with col9:
   st.metric("Weighted water filled porosity", round(water_filled_porosity_weighted, 2), "L porewater / L soil", delta_color="off")

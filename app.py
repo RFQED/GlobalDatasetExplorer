@@ -228,25 +228,25 @@ with col1:
   st.metric("Weighted mean ph", round(ph_mean_weighted,2), "", delta_color="off")
 
 with col2:
-  st.metric("Mean bulk_den", round(bulk_den_mean_weighted,2), "kg dm-3", delta_color="off")
+  st.metric("Weighted bulk_den", round(bulk_den_mean_weighted,2), "kg dm-3", delta_color="off")
 
 with col3:
-  st.metric("Mean Precip", round(precip_mean_weighted, 0), "mm/yr", delta_color="off")
+  st.metric("Weighted Precip", round(precip_mean_weighted, 0), "mm/yr", delta_color="off")
 
 with col4:
-  st.metric("Mean soil_temperature_0_to_7cm", round(soil_temp_mean_weighted0_7, 2), "°C", delta_color="off")
+  st.metric("Weighted soil_temperature_0_to_7cm", round(soil_temp_mean_weighted0_7, 2), "°C", delta_color="off")
 
 with col5:
-  st.metric("Mean soil_temperature_7_to_28cm", round(soil_temp_mean_weighted7_28, 2), "°C", delta_color="off")
+  st.metric("Weighted soil_temperature_7_to_28cm", round(soil_temp_mean_weighted7_28, 2), "°C", delta_color="off")
   
 with col6:
-  st.metric("Mean soil_moisture_0_to_7cm", round(soil_moisture_mean_weighted0_7, 2), "°C", delta_color="off")
+  st.metric("Weighted soil_moisture_0_to_7cm", round(soil_moisture_mean_weighted0_7, 2), "°C", delta_color="off")
 
 with col7:
-  st.metric("Mean soil_moisture_7_to_28cm", round(soil_moisture_mean_weighted7_28, 2), "°C", delta_color="off")
+  st.metric("Weighted soil_moisture_7_to_28cm", round(soil_moisture_mean_weighted7_28, 2), "°C", delta_color="off")
 
 with col8:
-  st.metric("Mean cec", round(cec_weighted, 2), "cmol per kg", delta_color="off")
+  st.metric("Weighted cec", round(cec_weighted, 2), "cmol per kg", delta_color="off")
 
 with col9:
-  st.metric("Mean water filled porosity", round(waterfilledporosity_weighted, 2), "L porewater / L soil", delta_color="off")
+  st.metric("Weighted water filled porosity", round(waterfilledporosity_weighted, 2), "L porewater / L soil", delta_color="off")

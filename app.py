@@ -3,7 +3,6 @@ from azure.storage.blob import BlobServiceClient
 import io
 import os
 import streamlit as st
-from math import sin, cos, sqrt, atan2, radians, pi
 
 import plotly #TODO clean up all plotly imports
 from plotly.subplots import make_subplots
@@ -19,21 +18,6 @@ mapbox_token='pk.eyJ1IjoicmZxZWQiLCJhIjoiY2t4MHBxZjE4MHU3NzJ2bnl3cmV6bzZodCJ9.qw
 px.set_mapbox_access_token(mapbox_token)
 
 connect_str = os.getenv('AZURE_STORAGE_CONNECTION_STRING')
-
-def getDist(lat1,lon1,lat2,lon2):
-  R = 6373.0
-  lat1 = radians(lat1)
-  lon1 = radians(lon1)
-  lat2 = radians(lat2)
-  lon2 = radians(lon2)
-
-  dlon = lon2 - lon1
-  dlat = lat2 - lat1
-
-  a = sin(dlat / 2)**2 + cos(lat1) * cos(lat2) * sin(dlon / 2)**2
-  c = 2 * atan2(sqrt(a), sqrt(1 - a))
-
-  return R * c
 
 def filter_data_quarry_distance(data: pd.DataFrame, base_lat, base_lng, max_distance) -> pd.DataFrame:
     def check_distance(latlng: np.ndarray) -> bool:
@@ -77,32 +61,23 @@ with st.form(key='starting'):
         weighted_avg = st.checkbox('Calculated weighted average using cropland % weight')
         
 
-#make a bounding box around this lat_lon
-#df = df[df['latitude'] < point_lat + 20]
-#df = df[df['latitude'] > point_lat - 20]
+# reduce dataframe to just around the point
+df = df[df['latitude'] < point_lat + 20]
+df = df[df['latitude'] > point_lat - 20]
 
-#df = df[df['longitude'] < point_lon + 20]
-#df = df[df['longitude'] > point_lon - 20]
-
-
-#Apply distance function to dataframe
-#df['dist']=list(map(lambda k: getDist(df.loc[k]['latitude'],df.loc[k]['longitude'], point_lat, point_lon), df.index))
-#df = df[df['dist'] < chosen_radius]
+df = df[df['longitude'] < point_lon + 20]
+df = df[df['longitude'] > point_lon - 20]
 
 df = df[df['is_crop'] > chosen_per_crop]
 
+#filter by distance
 df = filter_data_quarry_distance(df, point_lat, point_lon, chosen_radius)
 
+#change precip to int
+df = df.astype({'precipitation':'int'})
 
-r_earth = 6373.0
-lat_low  = point_lat - (chosen_radius / r_earth) * (180 / pi);
-lat_high   = point_lat + (chosen_radius / r_earth) * (180 / pi);
-
-lon_low = point_lon - (chosen_radius / r_earth) * (180 / pi) / cos(point_lat * pi/180);
-lon_high = point_lon + (chosen_radius / r_earth) * (180 / pi) / cos(point_lat * pi/180);
-    
-mid_lat = (lat_low + lat_high) / 2
-mid_lon = (lon_low + lon_high) / 2
+#remove unwanted cols
+df = df.drop(["is_soil", "Unnamed: 0"], axis=1, inplace=True)
 
 chosen_point_data = [[point_lat, point_lon, 100]]
 df_chosen_point = pd.DataFrame(chosen_point_data, columns=['lat', 'lon', 'size'])
@@ -116,8 +91,8 @@ col1, col2 = st.columns(2)
 
 with col1:
     st.write("Topsoil pH (in H2O), -log(H+)")
-    fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='ph', zoom=zoom_level, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
-    #fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":mid_lat, "lon":mid_lon})
+    fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='ph', zoom=zoom_level, center={"lat":point_lat, "lon":point_lon}, color_continuous_scale="inferno")
+    #fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":point_lat, "lon":point_lon})
     #fig.add_trace(fig2.data[0])
     fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
                        mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
@@ -126,8 +101,8 @@ with col1:
     st.plotly_chart(fig, use_container_width=True)
 
     st.write("Soil Temperature 0-7cm, dC")
-    fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='soil_temperature_0_to_7cm', zoom=zoom_level, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
-    fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":mid_lat, "lon":mid_lon})
+    fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='soil_temperature_0_to_7cm', zoom=zoom_level, center={"lat":point_lat, "lon":point_lon}, color_continuous_scale="inferno")
+    fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":point_lat, "lon":point_lon})
     fig.add_trace(fig2.data[0])
     fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
                        mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
@@ -138,8 +113,8 @@ with col1:
 
 with col2:
     st.write("Avg Yearly Precipitation (mm/yr), (Over 10yrs)")
-    fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='precipitation', zoom=zoom_level, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
-    fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":mid_lat, "lon":mid_lon})
+    fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='precipitation', zoom=zoom_level, center={"lat":point_lat, "lon":point_lon}, color_continuous_scale="inferno")
+    fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":point_lat, "lon":point_lon})
     fig.add_trace(fig2.data[0])
     fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
                        mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
@@ -149,8 +124,8 @@ with col2:
     st.plotly_chart(fig, use_container_width=True)
 
     st.write("Soil Moisture 0-7cm, dC")
-    fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='soil_moisture_0_to_7cm', zoom=zoom_level, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
-    fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":mid_lat, "lon":mid_lon})
+    fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='soil_moisture_0_to_7cm', zoom=zoom_level, center={"lat":point_lat, "lon":point_lon}, color_continuous_scale="inferno")
+    fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":point_lat, "lon":point_lon})
     fig.add_trace(fig2.data[0])
     fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
                        mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
@@ -162,8 +137,8 @@ with col2:
 
 
 st.write("% Cropland")
-fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='is_crop', zoom=zoom_level, center={"lat":mid_lat, "lon":mid_lon}, color_continuous_scale="inferno")
-fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":mid_lat, "lon":mid_lon})
+fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='is_crop', zoom=zoom_level, center={"lat":point_lat, "lon":point_lon}, color_continuous_scale="inferno")
+fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":point_lat, "lon":point_lon})
 fig.add_trace(fig2.data[0])
 fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
                    mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},

@@ -182,4 +182,4 @@ st.plotly_chart(fig, use_container_width=True)
 col1, col2, col3, col4, col5, col6 = st.columns(6)
 
 with col1:
-  st.metric("Mean Precip", round(df['precipitation'].mean(),0), "mm/yr")
+  st.metric("Mean Precip", round(df['precipitation'].mean(),0), "mm/yr", delta_color="off")

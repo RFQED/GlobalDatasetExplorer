@@ -11,6 +11,7 @@ import plotly.graph_objects as go
 import plotly.express as px
 
 import h3
+import numpy as np
 
 st.set_page_config(layout="wide")
 

@@ -80,8 +80,10 @@ df_chosen_point = pd.DataFrame(chosen_point_data, columns=['lat', 'lon', 'size']
 df['soil temp 0-7cm'] = df['soil_temperature_0_to_7cm']
 df['soil temp 7-28cm'] = df['soil_temperature_7_to_28cm']
 
-df['water_filled_porosity'] = ((df['soil_moisture_0_to_7cm'] + df['soil_moisture_7_to_28cm'])/2) * (df['bulk_den'] * 1000) 
-df['water_filled_porosity'] = np.round(df['water_filled_porosity'],decimals = 3)
+# Removing water filled porosity for now
+#df['water_filled_porosity'] = ((df['soil_moisture_0_to_7cm'] + df['soil_moisture_7_to_28cm'])/2) * (df['bulk_den'] * 1000) 
+#df['water_filled_porosity'] = np.round(df['water_filled_porosity'],decimals = 3)
+
 #,longitude,latitude,precipitation,temperature_2m,soil_temperature_0_to_7cm,soil_temperature_7_to_28cm,soil_moisture_0_to_7cm,soil_moisture_7_to_28cm,ph,cec,bulk_den,is_soil,is_crop
 
 col1, col2 = st.columns(2)
@@ -144,20 +146,21 @@ with col2:
     st.plotly_chart(fig, use_container_width=True)
 
 
-    st.write("Water Filled Porosity")
-    fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='water_filled_porosity', zoom=zoom_level, center={"lat":point_lat, "lon":point_lon}, color_continuous_scale="inferno")
-    fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":point_lat, "lon":point_lon})
-    fig.add_trace(fig2.data[0])
-    fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
-                       mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
-                       showlegend = False,
-                       coloraxis_colorbar_title_text = 'L_pw / L_soil')
-    
-    st.plotly_chart(fig, use_container_width=True)
+    #st.write("Water Filled Porosity")
+    #fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', color='water_filled_porosity', zoom=zoom_level, center={"lat":point_lat, "lon":point_lon}, color_continuous_scale="inferno")
+    #fig2 = px.scatter_mapbox(df_chosen_point, lat='lat', lon='lon', size='size', opacity=0.9, zoom=8, center={"lat":point_lat, "lon":point_lon})
+    #fig.add_trace(fig2.data[0])
+    #fig.update_layout( margin={"r":0,"t":0,"l":0,"b":0},
+    #                   mapbox = { 'style': "mapbox://styles/rfqed/ckx0prtk02gmq15mty3tlmhpu"},
+    #                   showlegend = False,
+    #                   coloraxis_colorbar_title_text = 'L_pw / L_soil')
+    #
+    #st.plotly_chart(fig, use_container_width=True)
 
 
 
-df['CEC_eqL'] = (df['cec'] / 100000) * (df['bulk_den'] / df['water_filled_porosity']) * 1000
+df['CEC_eqL'] = (df['cec'] / 100000) * (df['bulk_den'] / df['soil_moisture_0_to_7cm']) * 1000
+#df['CEC_eqL'] = (df['cec'] / 100000) * (df['bulk_den'] / df['water_filled_porosity']) * 1000
 
 st.header("Final values from dataset")
 
@@ -198,7 +201,7 @@ with col8:
   st.metric("Mean CEC cmol/kg", round(df['cec'].mean(),2), "cmol/kg", delta_color="off")
   st.metric("Mean CEC eqL", round(df['CEC_eqL'].mean(),2), "eqL", delta_color="off")
 with col9:
-  st.metric("Mean water filled porosity", round(df['water_filled_porosity'].mean(),2), "L porewater / L soil", delta_color="off")
+    #st.metric("Mean water filled porosity", round(df['water_filled_porosity'].mean(),2), "L porewater / L soil", delta_color="off")
 
 
 

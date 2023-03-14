@@ -164,7 +164,7 @@ df['CEC_eqL'] = (df['cec'] / 100000) * (df['bulk_den'] / df['soil_moisture_0_to_
 
 st.header("Final values from dataset")
 
-vars_to_plot = ['ph', 'bulk_den', 'precipitation', 'soil_temperature_0_to_7cm' , 'soil_temperature_7_to_28cm', 'soil_moisture_0_to_7cm' , 'soil_moisture_7_to_28cm', 'cec', 'is_crop', 'water_filled_porosity'] 
+vars_to_plot = ['ph', 'bulk_den', 'precipitation', 'soil_temperature_0_to_7cm' , 'soil_temperature_7_to_28cm', 'soil_moisture_0_to_7cm' , 'soil_moisture_7_to_28cm', 'cec', 'is_crop'] #, 'water_filled_porosity'] 
     
 fig = make_subplots(rows=1, cols=len(vars_to_plot))
 for i, var in enumerate(vars_to_plot):

@@ -200,7 +200,7 @@ with col7:
 with col8:
   st.metric("Mean CEC cmol/kg", round(df['cec'].mean(),2), "cmol/kg", delta_color="off")
   st.metric("Mean CEC eqL", round(df['CEC_eqL'].mean(),2), "eqL", delta_color="off")
-with col9:
+#with col9:
     #st.metric("Mean water filled porosity", round(df['water_filled_porosity'].mean(),2), "L porewater / L soil", delta_color="off")
 
 

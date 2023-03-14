@@ -168,7 +168,7 @@ for i, var in enumerate(vars_to_plot):
     fig.add_trace(go.Box(y=df[var], name=var, boxmean=True),row=1, col=i+1)
 
 fig.update_traces(boxpoints='all', jitter=.3)
-fig.update_layout(height=750)
+fig.update_layout(height=750, showlegend=False)
 st.plotly_chart(fig, use_container_width=True)
 
 col1, col2, col3, col4, col5, col6, col7, col8, col9 = st.columns(9)

@@ -32,7 +32,7 @@ def filter_data_quarry_distance(data: pd.DataFrame, base_lat, base_lng, max_dist
 @st.cache_data(show_spinner="Fetching data from Azure...")
 def get_data():
     blob_service_client = BlobServiceClient.from_connection_string(connect_str)
-    container_client = blob_service_client.get_container_client("globaldataset")
+    container_client = blob_service_client.get_container_client("globaldata")
     blob_client = container_client.get_blob_client("cropland_only_global_data.csv")
     #blob_client = container_client.get_blob_client("regridded_data_v5.csv")
     csv_content = blob_client.download_blob().readall()
